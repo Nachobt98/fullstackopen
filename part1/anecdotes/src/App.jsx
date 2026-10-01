@@ -15,6 +15,9 @@ const App = () => {
 
   return (
     <>
+      <h1>
+        Anecdote of the day
+      </h1>
       <div>
       {anecdotes[selected].text}
       <p>Has {anecdotes[selected].votes} votes</p>
@@ -33,9 +36,15 @@ const App = () => {
       }}>
       vote
       </button>
+
+       <h1>
+        Anecdote with most votes
+      </h1>
+      <div>
+        {anecdotes.reduce((max, anecdote) => anecdote.votes > max.votes ? anecdote : max, anecdotes[0]).text}
+        <p>Has {anecdotes.reduce((max, anecdote) => anecdote.votes > max.votes ? anecdote : max, anecdotes[0]).votes} votes</p>
+      </div>
     </>
-
-
   )
 }
 
