@@ -5,12 +5,7 @@ import ShowPersons from './components/ShowPersons'
 import axios from 'axios'
 
 const App = () => {
- const [persons, setPersons] = useState([
-    { name: 'Arto Hellas', number: '040-123456', id: 1 },
-    { name: 'Ada Lovelace', number: '39-44-5323523', id: 2 },
-    { name: 'Dan Abramov', number: '12-43-234345', id: 3 },
-    { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 }
-  ])
+  const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [searchName, setSearchName] = useState('')
@@ -31,21 +26,30 @@ const App = () => {
       return
     }
 
-    setPersons((currentPersons) => currentPersons.concat({ name, number: newNumber, id: persons.length + 1 }))
-    setNewName('')
-    setNewNumber('')
+    axios
+      .post('http://localhost:3001/persons', { name, number: newNumber })
+      .then((response) => {
+        setPersons((currentPersons) => currentPersons.concat(response.data))
+        setNewName('')
+        setNewNumber('')
+      })
+      .catch((error) => {
+        console.error('Failed to add person:', error)
+        alert('Could not add the person. Please try again.')
+      })
   }
 
   useEffect(() => {
-    console.log('effect')
     axios
       .get('http://localhost:3001/persons')
-      .then(response => {
-        console.log('promise fulfilled')
+      .then((response) => {
         setPersons(response.data)
       })
+      .catch((error) => {
+        console.error('Failed to fetch persons:', error)
+        alert('Could not load the phonebook. Please try again.')
+      })
   }, [])
-  console.log('render', persons.length, 'persons')
 
   return (
     <div>
