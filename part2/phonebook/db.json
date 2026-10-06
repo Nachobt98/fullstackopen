@@ -1,11 +1,6 @@
 {
   "persons": [
     {
-      "name": "Dan Abramov",
-      "number": "11-123456",
-      "id": "3"
-    },
-    {
       "name": "Mary Poppendieck",
       "number": "39-23-6423122",
       "id": "4"
@@ -26,14 +21,19 @@
       "id": "l-sWGZKoRYo"
     },
     {
-      "name": "Pedro",
-      "number": "23-134569",
-      "id": "od6t0md2gB4"
+      "name": "Maria",
+      "number": "98-1836345",
+      "id": "lCrtu5bf_vM"
     },
     {
-      "name": "Marcos",
-      "number": "23-123947",
-      "id": "PmvlZTaUCaE"
+      "name": "loco",
+      "number": "23132123123",
+      "id": "rYin9Jto8g8"
+    },
+    {
+      "name": "den abramov",
+      "number": "123123123",
+      "id": "RD7riwSxOtw"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

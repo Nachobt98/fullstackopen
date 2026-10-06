@@ -10,6 +10,7 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [errorMessage, setErrorMessage] = useState(null)
+  const [typeMessage, setTypeMessage] = useState("")
   const [searchName, setSearchName] = useState('')
 
   const addPerson = (event) => {
@@ -28,12 +29,21 @@ const App = () => {
           .replaceNumber(alreadyAdded.id, { name, number: newNumber })
           .then((person) => {
             setPersons((currentPersons) => currentPersons.map((p) => (p.id === person.id ? person : p)))
+            setTypeMessage("success")
+          setErrorMessage(`Updated ${name} number`)
+          setTimeout(() => {
+            setErrorMessage(null)
+          }, 5000)
             setNewName('')
             setNewNumber('')
           })
           .catch((error) => {
             console.error('Failed to update person:', error)
-            alert('Could not update the person. Please try again.')
+            setTypeMessage("error")
+            setErrorMessage(`Information of ${name} has already been removed from server`)
+             setTimeout(() => {
+            setErrorMessage(null)
+          }, 5000)
           })
       }
       return
@@ -43,6 +53,7 @@ const App = () => {
         .create({ name, number: newNumber })
         .then((person) => {
           setPersons((currentPersons) => currentPersons.concat(person))
+          setTypeMessage("success")
           setErrorMessage(`Added ${name}`)
           setTimeout(() => {
             setErrorMessage(null)
@@ -52,7 +63,11 @@ const App = () => {
       })
       .catch((error) => {
         console.error('Failed to add person:', error)
-        alert('Could not add the person. Please try again.')
+        setTypeMessage("error")
+        setErrorMessage(`Information of ${name} has already been removed from server`)
+          setTimeout(() => {
+            setErrorMessage(null)
+          }, 5000)
       })
   }
 
@@ -70,7 +85,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Notification message={errorMessage} />
+      <Notification message={errorMessage} type={typeMessage} />
       <SearchFilter
         filter={searchName}
         handleFilterChange={(event) => setSearchName(event.target.value)}
