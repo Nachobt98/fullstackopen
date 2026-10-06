@@ -64,7 +64,7 @@ const App = () => {
         handleNameChange={(event) => setNewName(event.target.value)}
         handleNumberChange={(event) => setNewNumber(event.target.value)}
       />
-      <ShowPersons persons={persons.filter((person) => person.name.toLowerCase().includes(searchName.toLowerCase()))} />
+      <ShowPersons persons={persons.filter((person) => person.name.toLowerCase().includes(searchName.toLowerCase()))} setPersons={setPersons} />
     </div>
   )
 }

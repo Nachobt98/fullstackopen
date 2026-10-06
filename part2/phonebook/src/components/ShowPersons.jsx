@@ -1,11 +1,16 @@
-const ShowPersons = ({ persons }) => {
+import DeleteButton from './DeleteButton'
+
+const ShowPersons = ({ persons, setPersons }) => {
   return (
     <div>
         <h2>Numbers</h2>
-      {persons.map((person) => (
+          {persons.map((person) => (
         <p key={person.id}>
-          {person.name}: {person.number}
+          {person.name}: {person.number}  
+          <DeleteButton person={person} setPersons={setPersons} />
         </p>
+        
+
       ))}
     </div>
   )
