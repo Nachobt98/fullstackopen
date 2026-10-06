@@ -29,6 +29,11 @@
       "name": "Marcos Rodriguez",
       "number": "28-847593",
       "id": "Y-Vlz2WHggI"
+    },
+    {
+      "name": "Pere Galdós",
+      "number": "123-873647",
+      "id": "l-sWGZKoRYo"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

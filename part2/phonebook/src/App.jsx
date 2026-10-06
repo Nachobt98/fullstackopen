@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import SearchFilter from './components/SearchFilter'
 import PersonForm from './components/PersonForm'
 import ShowPersons from './components/ShowPersons'
-import axios from 'axios'
+import personService from './services/persons'
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -26,12 +26,12 @@ const App = () => {
       return
     }
 
-    axios
-      .post('http://localhost:3001/persons', { name, number: newNumber })
-      .then((response) => {
-        setPersons((currentPersons) => currentPersons.concat(response.data))
-        setNewName('')
-        setNewNumber('')
+      personService
+        .create({ name, number: newNumber })
+        .then((person) => {
+          setPersons((currentPersons) => currentPersons.concat(person))
+          setNewName('')
+          setNewNumber('')
       })
       .catch((error) => {
         console.error('Failed to add person:', error)
@@ -40,11 +40,10 @@ const App = () => {
   }
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/persons')
-      .then((response) => {
-        setPersons(response.data)
-      })
+
+    personService.getAll().then((data) => {
+      setPersons(data)
+    })
       .catch((error) => {
         console.error('Failed to fetch persons:', error)
         alert('Could not load the phonebook. Please try again.')
