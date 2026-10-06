@@ -3,11 +3,13 @@ import SearchFilter from './components/SearchFilter'
 import PersonForm from './components/PersonForm'
 import ShowPersons from './components/ShowPersons'
 import personService from './services/persons'
+import Notification from './components/Notification'
 
 const App = () => {
   const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
+  const [errorMessage, setErrorMessage] = useState(null)
   const [searchName, setSearchName] = useState('')
 
   const addPerson = (event) => {
@@ -41,6 +43,10 @@ const App = () => {
         .create({ name, number: newNumber })
         .then((person) => {
           setPersons((currentPersons) => currentPersons.concat(person))
+          setErrorMessage(`Added ${name}`)
+          setTimeout(() => {
+            setErrorMessage(null)
+          }, 5000)
           setNewName('')
           setNewNumber('')
       })
@@ -64,6 +70,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={errorMessage} />
       <SearchFilter
         filter={searchName}
         handleFilterChange={(event) => setSearchName(event.target.value)}

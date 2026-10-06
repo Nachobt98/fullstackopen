@@ -24,6 +24,16 @@
       "name": "Pere Galdós",
       "number": "123-873647",
       "id": "l-sWGZKoRYo"
+    },
+    {
+      "name": "Pedro",
+      "number": "23-134569",
+      "id": "od6t0md2gB4"
+    },
+    {
+      "name": "Marcos",
+      "number": "23-123947",
+      "id": "PmvlZTaUCaE"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
