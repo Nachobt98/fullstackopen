@@ -21,8 +21,19 @@ const App = () => {
     )
 
     if (alreadyAdded) {
-      alert(`${name} is already added to phonebook`)
-      setNewName('')
+      if (window.confirm(`${name} is already added to phonebook, replace the old number with a new one?`)) {
+        personService
+          .replaceNumber(alreadyAdded.id, { name, number: newNumber })
+          .then((person) => {
+            setPersons((currentPersons) => currentPersons.map((p) => (p.id === person.id ? person : p)))
+            setNewName('')
+            setNewNumber('')
+          })
+          .catch((error) => {
+            console.error('Failed to update person:', error)
+            alert('Could not update the person. Please try again.')
+          })
+      }
       return
     }
 
